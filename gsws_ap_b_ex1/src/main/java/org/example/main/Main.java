@@ -3,6 +3,7 @@ package org.example.main;
 import org.example.Parrot;
 import org.example.config.ProjectConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.function.Supplier;
 
@@ -37,5 +38,9 @@ public class Main {
             context.registerBean("parrot4", Parrot.class, parrotSupplier, bc->bc.setPrimary(false));
             Parrot p5 = context.getBean("parrot4", Parrot.class);
             System.out.println(p5.getName());
+
+            var xmlContext = new ClassPathXmlApplicationContext("config.xml");
+            Parrot p6 = xmlContext.getBean(Parrot.class);
+            System.out.println(p6.getName());
     }
 }
